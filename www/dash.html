@@ -1,0 +1,95 @@
+{% extends "index.html" %}
+{%- from 'static/util/topnav.html' import head, topnav with context %}
+{% block title %}Dash - Media Library{% endblock %}
+{% block head %}
+
+	{{ super() }}
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/dash.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/tvshow.css') }}" />
+	<link rel="stylesheet" media="only screen and (max-device-width: 800px)" href="{{ url_for('static', filename='stylesheets/dash_portable.css') }}" />
+	<script type="text/javascript" src="{{ url_for('static', filename='js/dash.js') }}"></script>
+	{{ head() }}
+
+{% endblock %}
+{% block content %}
+
+	{{ super() }}
+	{{ topnav() }}
+
+	<div id="dash-content">
+
+		{% if progress is not none and progress|length > 0 %}
+		<div class="dashMedia">Progress</div>
+		<div class="dashMediaContainer" id="dashProgress">
+			{% for item in progress %}
+
+				{% if item['type'] == 'episode' %}
+					<a href="/tvshows/{{ item['seriesid'] }}/{{ item['episode_id'] }}" class="episode pointer left">
+						<div class="episode_thumbnail">
+							<img class="loading episode_thumbnail_img" src="/static/banners/{{ item['filename'] }}">
+							<div class="episode_status">
+								{% if item['path'] == '' %}
+									<div class="undownloaded"></div>
+								{% endif %}
+
+								{% if item['downloading'] != 0 %}
+									<div class="downloading"></div>
+								{% endif %}
+							</div>
+
+							{% set progressWidth = (277 * ( item['progress'] / 100)) %}
+							<div class="progress left" style="width: {{ progressWidth }}px;"></div>
+						</div>
+
+						{% for c in config %}
+							{% if c['config'] == 'display_media_title' and c['value'] == '1' %}		
+								<div class="text series_name left">{{ item['SeriesName'] }}</div>
+								<div class="text series_number right">S{{ '%02d' % item['SeasonNumber']|int }}E{{ '%02d' % item['EpisodeNumber']|int }}</div>
+							{% endif %}
+						{% endfor %}
+						
+					</a>
+				{% endif %}
+
+			{% endfor %}
+		</div>
+		{% endif %}
+		
+		{% if recommended is not none and recommended|length > 0 %}
+		<div class="dashMedia">Recommended</div>
+		<div class="dashMediaContainer" id="dashRecommended">
+			<div class="media" style="background-color: blue;"></div>
+			<div class="media" style="background-color: green;"></div>
+			<div class="media" style="background-color: blue;"></div>
+			<div class="media" style="background-color: green;"></div>
+			<div class="media" style="background-color: blue;"></div>
+			<div class="media" style="background-color: green;"></div>
+			<div class="media" style="background-color: blue;"></div>
+			<div class="media" style="background-color: green;"></div>
+
+		</div>
+		{% endif %}
+
+		{% if new is not none and new|length > 0 %}
+		<div class="dashMedia">New</div>
+		<div class="dashMediaContainer" id="dashNew">
+			<div class="media" style="background-color: blue;"></div>
+			<div class="media" style="background-color: green;"></div>
+			<div class="media" style="background-color: blue;"></div>
+			<div class="media" style="background-color: green;"></div>
+
+		</div>
+		{% endif %}
+	</div>
+
+
+<script>
+{% for c in config %}
+	{% if c['config'] == 'display_fanart' and c['value'] == '1' %}
+		setBackground("/static/banners/{{ fanart }}", true, true);
+	{% endif %}
+{% endfor %}
+</script>
+
+{% endblock %}

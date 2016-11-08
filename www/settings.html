@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+{%- from 'static/util/topnav.html' import head, topnav with context %}
+{%- from 'static/util/search.html' import search with context %}
+{%- from 'static/util/variables.html' import list_empty %}
+
+{% block title %}TV Shows{% endblock %}
+{% block head %}
+{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/settings.css') }}" />
+	<script type="text/javascript" src="{{ url_for('static', filename='js/settings.js') }}"></script>
+	{{ head() }}
+	<style>
+
+	#content {
+		width: 800px;
+		margin: 0 auto; 
+	}
+
+	</style>
+{% endblock %}
+
+
+{% block body %}
+	{{ topnav() }}
+	<!--{{ search() }}-->
+{% endblock %}
+
+
+
+{% block content %}
+
+{% include 'static/util/settings_sidebar.html' %}
+
+<div id="settings_content">
+	{% set category = request.path.split('/') %}
+
+	{% if category[2] == 'general' or category[2] is undefined %}
+		{% include 'static/util/settings_general.html' %}
+	{% elif category[2] == 'display' %}
+		{% include 'static/util/settings_display.html' %}
+	{% elif category[2] == 'manage' %}
+		{% include 'static/util/settings_manage.html' %}
+	{% elif category[2] == 'client' %}
+		{% include 'static/util/settings_client.html' %}
+	{% elif category[2] == 'torrent' %}
+		{% include 'static/util/settings_torrent.html' %}
+	{% elif category[2] == 'statistics' %}
+		{% include 'static/util/settings_statistics.html' %}
+	{% elif category[2] == 'about' %}
+		{% include 'static/util/settings_about.html' %}
+	{% endif %}
+	
+</div>
+
+
+
+
+{% endblock %}

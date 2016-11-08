@@ -1,0 +1,49 @@
+ffmpeg -i input.mkv -vcodec libx264 -preset medium -maxrate 3000k -bufsize 6000k -vf "scale=1280:-1,format=yuv420p" -g 50 -acodec libmp3lame -b:a 128k -ac 2 -ar 44100 -f flv rtmp://192.168.10.121/myapp/test
+
+ffmpeg -i input.mp4 -vcodec libx264 -preset veryfast -maxrate 3000k -bufsize 6000k -vf "scale=1280:-1,format=yuv420p" -g 50 -acodec libmp3lame -b:a 128k -ac 2 -ar 44100 -f flv rtmp://192.168.10.121/myapp/test
+
+
+
+ffmpeg -re -i input.mp4 -map 0 -codec copy -f mpegts "udp://127.0.0.1:2000"
+
+
+
+
+
+
+
+ffmpeg -re -i input.mkv -vcodec libx264 -preset veryfast -maxrate 3000k -bufsize 6000k -map 0 -codec copy -pix_fmt yuv420p -g 50 -acodec libmp3lame -b:a 128k -ac 2 -ar 44100 -f flv rtmp://192.168.10.121/live/test
+
+ffmpeg -i input.mkv -vcodec libx264 -preset veryfast -maxrate 3000k -bufsize 6000k -vf "scale=1280:-1,format=yuv420p" -g 50 -acodec libmp3lame -b:a 128k -ac 2 -ar 44100 -f flv rtmp://192.168.10.121/myapp/test
+
+
+
+ffmpeg -y -i input.mp4 -codec copy -bsf h264_mp4toannexb -map 0 -f segment -segment_time 10 -segment_format mpegts -segment_list "prog_index.m3u8" -segment_list_type m3u8 "fileSequence%d.ts"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ffmpeg -i input.mp4 -movflags faststart -acodec copy -vcodec copy output.mp4
+
+ffmpeg -i input.mp4 -movflags faststart -acodec copy -vcodec libx264 output.mp4
+
+ffmpeg -i input.mp4 -vcodec libx264 -preset veryfast -maxrate 3000k -bufsize 6000k -vf "scale=1280:-1,format=yuv420p" -g 50 -acodec libmp3lame -b:a 128k -ac 2 -ar 44100 output.mp4
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+#content {
+	padding-top: 0px;
+}
+#dash-content {
+	margin-top: 120px;
+}
+
+
+
+/*
+ *	DASH BOARD
+ */
+.dashMedia {
+	font-size: 24px;
+	color: #F7FFF7;
+	margin: auto; 
+	width: 100%;
+	margin-left: 40px;
+}
+.dashMediaContainer {
+	color: #F7FFF7;
+	margin: auto; 
+	margin-top: 5px;
+	margin-bottom: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.dashMediaContainer .episode {
+	display:inline-block;
+	float: none;
+	margin: 0px;
+	margin-right: 40px;
+}
+.dashMediaContainer .episode .progress {
+	margin-top: -8px;
+
+}

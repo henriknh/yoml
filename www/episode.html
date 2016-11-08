@@ -1,0 +1,83 @@
+{% extends "index.html" %}
+{%- from 'static/util/topnav.html' import head, topnav with context %}
+{%- from 'static/util/search.html' import search with context %}
+{%- from 'static/util/variables.html' import list_empty %}
+
+
+{% block title %}Episode{% endblock %}
+{% block head %}
+{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/episode.css') }}" />
+	{{ head() }}
+{% endblock %}
+
+
+{% block body %}
+	{{ topnav() }}
+{% endblock %}
+
+
+{% block content %}
+
+{% if tvshow|length == 0 %}
+<div id="empty">
+	<div id="phrase">{{ list_empty|random() }}</div>
+	<div id="add_new">Try to add new media in Settings</div>
+</div>
+
+{% else %}
+
+
+<script>
+{% for c in config %}
+	{% if c['config'] == 'display_fanart' and c['value'] == '1' %}
+		setBackground("/static/banners/{{ tvshow['fanart'] }}");
+	{% endif %}
+{% endfor %}
+</script>
+<div class="episode">
+
+	<a href="/tvshows/{{ tvshow['tvshow_id'] }}/{{ episode['episode_id'] }}/player" class="thumbnail">			
+		<!--<img class="poster loading" src="/static/banners/{{ tvshow['poster'] }}">-->			
+		<img class="poster loading" src="/static/banners/{{ episode['filename'] }}"/>
+ 		<img class="play" src="/static/icons/play.png"/>
+	</a>
+
+	<div class="header textshadow left">{{ episode['EpisodeName'] }}</div>
+	<div class="header textshadow right">{{ episode['FirstAired'] }}</div>
+	<br><br><br><br>
+	<div class="runtime textshadow left">{{ tvshow['Runtime'] }} min</div>
+	<div class="genre textshadow left">{{ tvshow['Genre'][1:-1]|replace('|', ', ') }}</div>
+	<div class="rating right">
+		<div class="" style="max-width: {{ episode['Rating']|int / 10 * 90 }}px; overflow:hidden;">
+			<img src="/static/icons/rating.png" style="width: 90px;">
+		</div>
+		<img class="rating-background" src="/static/icons/rating.png">
+	</div>
+	<br><br>
+	<div id="overview" class="overview">{{ episode['Overview'] }}</div>
+	<br>
+	<div id="director" class="overview">{{ episode['Director'] }}</div>
+	<br>
+	<div id="writer" class="overview">{{ episode['Writer'][1:-1]|replace('|', ', ') }}</div>
+
+</div>
+{% endif %}
+
+	<div class="clearfix">
+
+	<div id="media_options">
+		<img class="option" src="/static/icons/refresh.png" onclick="refresh_media()">
+		{% if episode['watched'] %}
+			<img class="option" src="/static/icons/unwatched.png" onclick="toggle_media_watched(this)">
+		{% else %}
+			<img class="option" src="/static/icons/watched.png" onclick="toggle_media_watched(this)">
+		{% endif %}
+		<img class="option" src="/static/icons/trash.png"  onclick="remove_media()">
+		<!--<img class="option" src="/static/icons/download.png">-->
+	</div>
+
+	<div class="clearfix">
+
+
+{% endblock %}

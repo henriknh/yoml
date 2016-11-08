@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% block title %}Page not found - Media Library{% endblock %}
+{% block content %}
+
+	{{ super() }}
+
+	<div id="notfound">
+		<div id="header">
+			<a href="/">
+				<img id="logo" class="left" src="{{ url_for('static', filename='icons/icon.png') }}">
+				<div id="title" class="right">MEDIA</div>
+			</a>
+		</div>
+		<div class="clearfix"></div>
+
+		<div id="notfoundText">Page not found :(</div>
+		<a href="/" id="takeMeHome" >Take me home!</a>
+
+	</div>
+
+{% endblock %}

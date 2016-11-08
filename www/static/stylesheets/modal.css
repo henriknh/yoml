@@ -1,0 +1,314 @@
+.modal-header input, #modal_search_results input, #modal_libraries input {
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+
+/*
+ *  MODAL
+ */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 200; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+#modal-background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.5);
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    border: 0px solid #888;
+    width: 600px;
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    z-index: 5;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+
+/*
+ *  MODAL CLOSE BUTTON
+ */
+ 
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    line-height: 40px;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    opacity: 0.8;
+}
+.close:active {
+    opacity: 0.5;
+}
+
+
+/*
+ *  MODAL AREAS
+ */
+ 
+.modal-header {
+    padding: 2px 16px 0px 16px;
+    color: white;
+}
+.modal-header div {
+    display: inline;
+    padding: 10px;
+    margin-right: 10px;
+}
+.modal-header div img {
+    height: 16px;
+    margin-right: 10px;
+}
+
+.modal-body {
+    padding: 16px;
+    color: white;
+    height: 390px;
+}
+
+.modal-footer {
+    padding: 8px 16px 16px 16px;
+    color: white;
+}
+
+/*
+ *  MODAL HEADER
+ */
+
+.modal_media_type {
+    background-color: #454545;
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    padding: 10px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    background-origin: content-box;
+    text-align: center;
+    margin-right: 10px;
+    
+}
+.modal_media_type img {
+    height: 16px;  
+    margin-right: 10px;
+    position: relative;
+    bottom: -2px;
+}
+
+.modal_media_type div {
+    margin-top: 5px;
+}
+.modal_media_type:hover {
+    opacity: 0.8;
+}
+
+input:active +.modal_media_type, input:active +.modal_media_type {
+    opacity: .8;
+}
+input:checked +.modal_media_type, input:checked +.modal_media_type {
+    background-color: #555555;
+}
+
+/*
+ *  MODAL BODIES
+ */
+ 
+#modal-body-1 {
+    display: block;
+}
+#modal-body-2 {
+    display: none; 
+}
+#modal-body-3 {
+    display: none;  
+}
+
+/*
+ *  MODAL BODY1 SEARCH
+ */
+
+#modal_search {
+    border: 1px solid #F7FFF7;
+    padding: 10px;
+    float: left;
+    width: 450px;
+}
+
+#btn_modal_search {
+    text-align: center;
+    background-color: #BCD979;
+    height: 37px;
+    line-height: 37px;
+    float: left;
+    margin-top: 0px;
+    width: 96px;
+    font-weight: bold;
+}
+#btn_modal_search img {
+    height: 20px;
+    position: relative;
+    bottom: -4px;
+}
+
+/*
+ *  MODAL BODY1 RESULTS
+ */
+
+#modal_search_results {
+    margin-top: 10px;
+    height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-right: -11px;
+    padding-right: 5px;
+}
+#modal_search_results .modal_result_label {
+    cursor: pointer;
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+#modal_search_results .modal_result_label .icon {
+    height: 16px;
+    float: left;
+    bottom: -2px;
+    position: relative;
+    padding: 5px 0px 5px 10px;
+}
+#modal_search_results .modal_result_label .name {
+    float: left;
+    margin-left: 10px;
+    line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 450px;
+}
+#modal_search_results .modal_result_label .year {
+    float: right;
+    line-height: 30px;
+}
+#modal_search_results .modal_result_label .url {
+    float: right;
+    line-height: 30px;
+    padding: 0px 10px 0px 0px;
+}
+#modal_search_results .modal_result_label:hover {
+    opacity: 0.8;
+}
+#modal_search_results input:active +.modal_result_label, #modal_search_results input:active +.modal_result_label {
+    opacity: .8;
+}
+#modal_search_results input:checked +.modal_result_label, #modal_search_results input:checked +.modal_result_label {
+    color: #BCD979;
+}
+
+/*
+ *  MODAL BODY2 RESULTS
+ */
+
+#modal_libraries {
+    margin-top: 10px;
+    height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-right: -11px;
+    padding-right: 5px;
+}
+#modal_libraries .modal_library_label {
+    cursor: pointer;
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+#modal_libraries .modal_library_label .icon {
+    height: 16px;
+    float: left;
+    bottom: -2px;
+    position: relative;
+    padding: 5px 0px 5px 10px;
+}
+#modal_libraries .modal_library_label .name {
+    float: left;
+    margin-left: 10px;
+    line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 450px;
+}
+#modal_libraries .modal_library_label:hover {
+    opacity: 0.8;
+}
+input:active +.modal_library_label, input:active +.modal_library_label {
+    opacity: .8;
+}
+input:checked +.modal_library_label, input:checked +.modal_library_label {
+    color: #BCD979;
+}
+
+/*
+ *  MODAL BOTTOM BUTTONS
+ */
+
+#btn_modal_prev, #btn_modal_next {
+    background-color: #BCD979;
+    width: 150px;
+    height: 37px;
+    border: none;
+    margin-top: 10px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    line-height: 37px;
+    cursor: pointer;
+}
+#btn_modal_prev {
+    display: none;
+}
+#btn_modal_prev:hover, #btn_modal_next:hover {
+    background-color: #c4dd88;
+}
+#btn_modal_prev:active, #btn_modal_next:active {
+    opacity: 0.5;
+}

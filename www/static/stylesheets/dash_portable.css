@@ -1,0 +1,38 @@
+#content {}
+#dash-content {
+	margin-top: 90px;
+}
+
+/*
+ *	DASH BOARD
+ */
+.dashMedia {
+	margin-left: 5%;
+}
+.dashMediaContainer {
+	margin-left: 5%;
+	margin-right: 5%;
+	padding-top: 10px;
+}
+.dashMediaContainer .episode {
+	max-width: 150px;
+	height: auto;
+}
+.dashMediaContainer .episode .episode_thumbnail {
+	width: 100%;
+	height: 84px;
+}
+.dashMediaContainer .episode .episode_thumbnail img {
+	width: 100%;
+	height: auto;
+
+}
+
+.dashMediaContainer .episode .progress {
+	margin-top: -88px;
+	height: 84px;
+}
+.dashMediaContainer .episode .series_number {
+	float: left;
+	text-align: left;
+}

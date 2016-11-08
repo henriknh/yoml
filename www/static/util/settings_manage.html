@@ -1,0 +1,93 @@
+<h1>Manage libraries</h1>
+
+{% if data|length == 0 %}
+
+	There are no media libraries to show
+
+{% else %}
+
+	<table style="width:100%">
+		<tr>
+			<td class="left">Type</td>
+			<td class="middle">Path</td>
+			<td class="right">Action</td>
+		</tr>
+	{% for library in data %}
+		<tr>
+			<td class="left">
+				{% if library['library_type'] == 'tvshows' %}
+					<div>
+						<img src="/static/icons/tvshow.png">
+						TV Show
+					</div>
+
+				{% elif library['library_type'] == 'movies' %}
+					<div>
+						<img src="/static/icons/movie.png">
+						Movie
+					</div>
+
+				{% elif library['library_type'] == 'pictures' %}
+					<div>
+						<img src="/static/icons/picture.png">
+						Picture
+					</div>
+
+				{% elif library['library_type'] == 'music' %}
+					<div>
+						<img src="/static/icons/music.png">
+						Music
+					</div>
+
+				{% endif %}
+				
+			</td>
+			<td class="middle">
+				{{ library['library_path'] }}
+			</td>
+			<td class="right">
+				<div id="remove" libraryid="{{ library['library_id'] }}" class="pointer" onclick="remove_library(this);">Remove</div>
+			<td>
+		</tr>
+
+	{% endfor %}
+	</table>
+
+{% endif %}
+<br>
+<br>
+<br>
+<h1>New library</h1>
+<p>Select type</p>
+<form action="/new_library" method="POST">
+	<div id="manage_navbar">
+		<input checked id="tvshow" type="radio" name="library_type" value="tvshows" />
+		<label class="image tvshow" for="tvshow">
+			<img src="/static/icons/tvshow.png">
+			<div>TV Show</div>
+		</label>
+		<input id="movie" type="radio" name="library_type" value="movies" />
+		<label class="image movie" for="movie">
+			<img src="/static/icons/movie.png">
+			<div>Movie</div>
+		</label>
+		<input id="picture" type="radio" name="library_type" value="pictures" />
+		<label class="image picture" for="picture">
+			<img src="/static/icons/picture.png">
+			<div>Picture</div>
+		</label>
+		<input id="music" type="radio" name="library_type" value="music" />
+		<label class="image music" for="music">
+			<img src="/static/icons/music.png">
+			<div>Music</div>
+		</label>
+	</div>
+
+	<p>Choose directory to store media</p>
+
+	<input id="filetree_current_path" type="text" name="path">
+	<div id="filetree">
+		<div id="filetree_browser"></div>
+	</div>
+	<button id="filetreesubmit" type="submit">Submit</button>
+</form>

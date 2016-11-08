@@ -1,0 +1,81 @@
+<form action="/update_config" method="post">
+
+{% for cfg in config if not cfg['value_type'] == '' %}
+
+	{% if cfg['config'].split('_')[0] == config_type %}
+
+		<div class="config">
+			<div class="option">{{ cfg['label'] }}</div>
+
+			<!-- port -->
+
+			{% if cfg['value_type'] == 'port' %}
+				<div class="clearfix"></div>
+				<div class="port">
+					<input type="number" id="{{ cfg['config'] }}" min="0" max="65535" class="value" name="{{ cfg['config_id'] }}" value="{{ cfg['value'] }}" onkeypress="return test_port_enter_key(event);">
+					<div id="test_port" onclick="test_port()">Test port</div>
+					<div id="test_port_result"></div>
+					<div id="test_port_result_text"></div>
+				</div>
+
+
+
+			<!-- bool -->
+
+			{% elif cfg['value_type'] == 'bool' %}
+				<div class="bool">
+					<input type="hidden" id="{{ cfg['config_id'] }}" name="{{ cfg['config_id'] }}" value="{{ cfg['value'] }}">
+					{% if cfg['value'] == '1' %}
+						<input type="checkbox" id="{{ cfg['config'] }}" name="{{ cfg['config_id'] }}" config_id="{{ cfg['config_id'] }}" checked>
+					{% else %}
+						<input type="checkbox" id="{{ cfg['config'] }}" name="{{ cfg['config_id'] }}" config_id="{{ cfg['config_id'] }}">
+					{% endif %}
+					<label for="{{ cfg['config'] }}" onclick="change_checkbox_value({{ cfg['config'] }}, {{ cfg['config_id'] }})"><span></span></label>
+				</div>
+
+
+			<!-- int -->
+
+			{% elif cfg['value_type'] == 'int' %}
+				<div class="clearfix"></div>
+				<div class="int">
+					<input type="number" min="0" max="65535" class="value" name="{{ cfg['config_id'] }}" value="{{ cfg['value'] }}">
+				</div>
+
+
+			<!-- text -->
+
+			{% elif cfg['value_type'] == 'text' %}
+				<div class="clearfix"></div>
+				<div class="text">
+					<input type="text" class="value" name="{{ cfg['config_id'] }}" value="{{ cfg['value'] }}">
+				</div>
+
+
+			<!-- select -->
+
+			{% elif cfg['value_type'] == 'select' %}
+				<div class="clearfix"></div>
+				<div class="select">
+					<select class="value" name="{{ cfg['config_id'] }}">
+					{% for select in cfg['value'].split(', ') %}
+						<option value="{{ select }}">{{ select }}</option>
+					{% endfor %}
+					</select>
+				</div>
+
+			{% endif %}
+
+
+			<div class="clearfix"></div>
+			{% if cfg['description'] is not none  %}
+				<div class="description">{{ cfg['description']|safe }}</div>
+			{% endif %}
+		</div>
+
+	{% endif %}
+
+{% endfor %}
+
+<input type="submit" id="save" value="Save changes">
+</form>

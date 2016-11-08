@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{%- from 'static/util/topnav.html' import head, topnav with context %}
+{%- from 'static/util/search.html' import search with context %}
+{%- from 'static/util/variables.html' import list_empty %}
+
+{% block title %}Pictures{% endblock %}
+{% block head %}
+{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/pictures.css') }}" />
+	{{ head() }}
+{% endblock %}
+
+
+{% block body %}
+	{{ topnav() }}
+	<!--{{ search() }}-->
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if tvshows|length == 0 %}
+<div id="empty">
+	<div id="phrase">{{ list_empty|random() }}</div>
+	<div id="add_new">Try to add new pictures in Settings</div>
+</div>
+
+{% else %}
+
+
+
+<script>
+    {% for c in config %}
+        {% if c['config'] == 'display_fanart' and c['value'] == '1' %}
+            setBackground("/static/banners/{{ fanart }}");
+        {% endif %}
+    {% endfor %}
+</script>
+{% endif %}
+
+{% endblock %}

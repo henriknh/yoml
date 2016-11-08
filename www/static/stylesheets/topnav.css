@@ -1,0 +1,75 @@
+
+/*
+ *	TOP BAR
+ */
+#topNav {
+	height: 70px;
+	text-align: center;
+	width: 100%;
+	position: fixed;
+	z-index: 10;
+}
+
+#topNav #navItemLogo {
+	height: 50px;
+	margin: 10px 30px 10px 30px;
+}
+#topNav #navItemLogo:hover {
+	opacity: 0.8;
+}
+#topNav #navItemLogo:active {
+	opacity: 0.5;
+}
+#toggle-menu {
+	display: none;
+}
+#topNav .navItemBox {
+	height: 70px;
+	width: 200px;
+	float: left;
+	display: inline;
+	text-decoration: none;
+
+	-ms-transform: skewX(-15deg);
+    -webkit-transform: skewX(-15deg);
+    transform: skewX(-15deg);
+}
+#topNav .navItemBox:hover {
+	opacity: 0.9;
+}
+#topNav .navItemBox:active {
+	opacity: 0.7;
+}
+#topNav .navItemBox .navItemText {
+	line-height: 70px;
+	font-size: 30px;
+	color: black;
+	margin: 0px 20px 0px 20px;
+	-ms-transform: skewX(15deg);
+    -webkit-transform: skewX(15deg);
+    transform: skewX(15deg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#topNav #header {
+	margin-left: -20px; 
+	padding-left: 20px; 
+}
+#topNav .navItemBox #logo {
+	height: 70px;
+	-ms-transform: skewX(15deg);
+    -webkit-transform: skewX(15deg);
+    transform: skewX(15deg);
+
+}
+#topNav #server_status {
+	width: 8px;
+	height: 100%;
+}
+#topNav #settings {
+	-ms-transform: skewX(0deg);
+    -webkit-transform: skewX(0deg);
+    transform: skewX(0deg);
+}
+

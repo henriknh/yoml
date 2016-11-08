@@ -1,0 +1,94 @@
+{% extends "index.html" %}
+{% block title %}Player{% endblock %}
+{% block head %}
+{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/player.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='js/player.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/iso639.js') }}"></script>
+    <link href="//vjs.zencdn.net/5.8/video-js.min.css" rel="stylesheet">
+    <script src="//vjs.zencdn.net/5.8/video.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
+    <style>
+    #footer {
+    	display: none;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+{{ super() }}
+
+
+
+
+{% set display_subtitle = {'value': False} %}
+{% set display_subtitle_language = {'value': False} %}
+{% for cfg in config %}
+    {% if cfg['config'] == 'display_subtitle' %}
+        {% if display_subtitle.update({'value': cfg['value']}) %}
+        {% endif %}
+    {% endif %}
+    {% if cfg['config'] == 'display_subtitle_language' %}
+        {% if display_subtitle_language.update({'value': cfg['value']}) %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<script>
+display_subtitle = {{ display_subtitle['value'] }}
+if(display_subtitle) {
+    subtitle_language = "{{ display_subtitle_language['value'] }}".replace(/^\s+|\s+$/g,"").split(/\s*,\s*/);
+}
+</script>
+
+
+
+<div id="videocontainer" onclick="togglePlayPause()">
+	<video id="player" width="352" height="198" poster="{{ url_for('static', filename='icons/transparent.png') }}" controls>
+		
+		<!--<track label="English" kind="subtitles" srclang="en" src="/static/sub.vtt" default>-->
+
+	</video>
+</div>
+
+<div id="topBar">
+	<div id="title">{{ episode['EpisodeName'] }}</div>
+    <img id="back" class="item button pointer" src="{{ url_for('static', filename='icons/close.png') }}" onclick="previousPage()" style="float: right;">
+    <img id="chromecast" class="item button pointer" src="{{ url_for('static', filename='icons/chromecast.png') }}" onclick="" style="float: right;">
+</div>
+
+<div id="playPauseMiddle" class="pointer" onclick="togglePlayPause()">
+    <img class="button" src="{{ url_for('static', filename='icons/play.png') }}">
+</div>
+
+<div id="bottomBar">
+    <img id="playPause" class="item button pointer" src="{{ url_for('static', filename='icons/play.png') }}" onclick="togglePlayPause()">
+    <div id="currentTime" class="item"></div>
+    <input id="progress" class="item" min="0" max="1" step="0.0001" value="0" type="range" onchange="setProgress()" />
+    <div id="totalTime" class="item"></div>
+    <img id="mute" class="item button right pointer" src="{{ url_for('static', filename='icons/volume-mute.png') }}" onclick="toggleMute()">
+    <input id="volume" class="item right" min="0" max="1" step="0.01" value="1" type="range" onchange="setVolume()" />
+    <img id="fullscreen" class="item button right pointer" src="{{ url_for('static', filename='icons/expand.png') }}" onclick="toggleFullscreen()">
+</div>
+
+
+<script>
+var m3u8 = "{{ videoinfo['m3u8'] }}";
+var startPosition = {{ videoinfo['start_position'] }};
+var videoDuration = {{ videoinfo['duration'] }};
+var path = "{{ episode['path'] }}";
+
+$("#videocontainer").ready(function() {
+    {% for c in config %}
+        {% if c['config'] == 'display_fanart' and c['value'] == '1' %}
+            setBackground("/static/banners/{{ tvshow['fanart'] }}", false, false, '0px');
+        {% endif %}
+    {% endfor %}
+ 
+    onLoad_player();
+    setTimeout(function() {
+        loadVideo();
+    }, 1000);
+});
+</script>
+
+{% endblock %}

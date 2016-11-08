@@ -1,0 +1,64 @@
+{% set category = request.path.split('/') %}
+<div id="settings_sidebar">
+	<ul>
+		<a href="/settings/general">
+			<li class="pointer green">
+				General
+				{% if category[2] == 'general' or category[2] is undefined %}
+					<div id="selected_setting"></div>
+				{% endif%}
+			</li>
+		</a>
+		<a href="/settings/display">
+			<li class="pointer green">
+				Display	
+				{% if category[2] == 'display' %}
+					<div id="selected_setting"></div>
+				{% endif%}
+			</li>
+		</a>
+		<a href="/settings/manage">
+			<li class="pointer green">
+				Manage Media		
+				{% if category[2] == 'manage' %}
+					<div id="selected_setting"></div>
+				{% endif%}
+			</li>
+		</a>
+		<a href="/settings/client">
+			<li class="pointer green">
+				Download client
+				{% if category[2] == 'client' %}
+					<div id="selected_setting"></div>
+				{% endif%}
+			</li>
+		</a>
+		<a href="/settings/torrent">
+			<li class="pointer green">
+				Torrent search
+				{% if category[2] == 'torrent' %}
+					<div id="selected_setting"></div>
+				{% endif%}
+			</li>
+		</a>
+		<a href="/settings/statistics">
+			<li class="pointer green">
+				Statistics
+				{% if category[2] == 'statistics' %}
+					<div id="selected_setting"></div>
+				{% endif%}
+			</li>
+		</a>
+		<a href="/settings/about">
+			<li class="pointer green">
+				About
+				{% if category[2] == 'about' %}
+					<div id="selected_setting"></div>
+				{% endif%}
+			</li>
+		</a>
+	</ul>
+	<ul class="bottom">
+		<a href="/logout"><li class="pointer green">Logout</li></a>
+	</ul>
+</div>

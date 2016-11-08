@@ -1,0 +1,38 @@
+
+#settings_sidebar {
+	width: 200px;
+	float: left;
+	padding: 10px;
+}
+#settings_sidebar ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+#settings_sidebar ul li {
+	margin: 10px; 
+	text-align: center;
+	color: white;
+	width: 200px;
+	height: 60px;
+	line-height: 60px;
+}
+#settings_sidebar ul li:hover {
+	background-color: #191616;
+	width: 206px;
+	height: 60px;
+	margin: 10px 7px 10px 7px; 
+}
+
+#settings_content {
+	color: white;
+	float: left;
+	display: block;
+	padding: 30px;
+}
+
+#settings_content h1 {
+	margin-top: 0px;
+	padding-top: 0px;
+
+}

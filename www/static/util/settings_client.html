@@ -1,0 +1,46 @@
+<h1>Download client</h1>
+
+{% set client_current_client = {'value': False} %}
+{% set client_current_client_id = {'value': False} %}
+{% for cfg in config %}
+	{% if cfg['config'] == 'client_current_client' %}
+		{% if client_current_client.update({'value': cfg['value']}) %}
+        {% endif %}
+		{% if client_current_client_id.update({'value': cfg['config_id']}) %}
+        {% endif %}
+	{% endif %}
+{% endfor %}
+
+<form action="/update_config" method="post">
+
+{% for cfg in config %}
+
+	{% if cfg['config'] == 'client_clients' %}
+		<div class="config">
+			<div class="option">{{ cfg['label'] }}</div>
+			<div class="clearfix"></div>
+			<div class="select">
+				<select class="value" name="{{ client_current_client_id['value'] }}" onchange="download_client_change()">
+				{% for select in cfg['value'].split(', ') %}
+					{% if select == client_current_client['value'] %}
+						<option value="{{ select }}" selected>{{ select }}</option>
+					{% else %}
+						<option value="{{ select }}">{{ select }}</option>
+					{% endif %}
+				{% endfor %}
+				</select>
+			</div>
+			<div class="clearfix"></div>
+			{% if cfg['description'] is not none  %}
+				<div class="description">{{ cfg['description'] }}</div>
+			{% endif %}
+		</div>
+	{% endif %}
+
+{% endfor %}
+
+<div id="download_client"></div>
+
+<input type="submit" id="save" value="Save changes">
+
+</form>

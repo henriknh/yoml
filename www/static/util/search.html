@@ -1,0 +1,6 @@
+{% macro search() %}
+	<div id="search" class="boxshadow" onclick="searchBarWidth(370, true)">
+		<input id="searchInput" class="textshadow left" onkeypress="return search_enter_key(event);">
+		<img id="btn_search" class="pointer button right" src="{{ url_for('static', filename='icons/search.png') }}" onclick="search()">
+	</div>
+{% endmacro %}

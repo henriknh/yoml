@@ -1,0 +1,78 @@
+{% extends "index.html" %}
+{%- from 'static/util/topnav.html' import head, topnav with context %}
+{%- from 'static/util/search.html' import search with context %}
+{%- from 'static/util/variables.html' import list_empty %}
+
+{% block title %}TV Shows{% endblock %}
+{% block head %}
+{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/tvshows.css') }}" />
+    <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 800px)" href="{{ url_for('static', filename='stylesheets/tvshows_portable.css') }}" />
+	<script type="text/javascript" src="{{ url_for('static', filename='js/tvshows.js') }}"></script>
+	{{ head() }}
+{% endblock %}
+
+
+{% block body %}
+	{{ topnav() }}
+	<!--{{ search() }}-->
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if tvshows|length == 0 %}
+<div id="empty">
+	<div id="phrase">{{ list_empty|random() }}</div>
+	<div id="add_new">Try to add new media in Settings</div>
+</div>
+
+{% else %}
+
+{% for tvshow in tvshows %}
+<a href="tvshows/{{ tvshow['tvshow_id'] }}" class="tvshows pointer">
+	<img class="thumbnail black loading" src="static/banners/{{ tvshow['poster'] }}">
+
+	<div class="episode_status">
+		{% if tvshow['unwatched'] != 0 %}
+			<div class="unwatched">{{ tvshow['unwatched'] }}</div>
+		{% endif %}
+
+		{% if tvshow['undownloaded'] != 0 %}
+			<div class="undownloaded">{{ tvshow['undownloaded'] }}</div>
+		{% endif %}
+
+		{% if tvshow['downloading'] != 0 %}
+			<div class="downloading">{{ tvshow['downloading'] }}</div>
+		{% endif %}
+	</div>
+
+	<div class="clearfix"></div>
+
+	{% for c in config %}
+		{% if c['config'] == 'display_media_title' and c['value'] == '1' %}		
+			<div class="left series_name">{{ tvshow['SeriesName'] }}</div>	
+			<!--<div class="right">' + year + '</div>-->
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+
+</a>
+
+
+
+<div class="clearfix"></div>
+
+
+<script>
+{% for c in config %}
+	{% if c['config'] == 'display_fanart' and c['value'] == '1' %}
+		setBackground("/static/banners/{{ fanart }}");
+	{% endif %}
+{% endfor %}
+</script>
+
+{% endif %}
+
+{% endblock %}

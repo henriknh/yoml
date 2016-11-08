@@ -1,0 +1,41 @@
+/*
+ *	TV SHOWS
+ */
+.tvshows {
+	width: 50%;
+	max-width: 217px;
+	height: auto;
+	margin: 20px 0px 30px 0px; 
+}
+.tvshows .thumbnail {
+	width: 80%;
+    height: auto;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.tvshows .thumbnail:hover {}
+.tvshows .thumbnail:active {}
+.tvshows .episode_status .unwatched, .tvshows .episode_status .undownloaded, .tvshows .episode_status .downloading {}
+.tvshows .episode_status .unwatched {}
+.tvshows .episode_status .undownloaded {}
+.tvshows .episode_status .downloading {}
+.tvshows .episode_status {
+	margin-top: 10px;
+	margin-left: -15px;
+}
+.tvshows .unwatched {}
+.tvshows .not_downloaded {}
+.tvshows .not_watched .not_watched_text {}
+.tvshows .not_downloaded .not_watched_text {}
+.tvshows .series_name {
+	margin-left: 10%;
+	width: 80%;
+	padding-left: 0;
+	padding-right: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+}

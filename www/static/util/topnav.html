@@ -1,0 +1,30 @@
+{% macro head() %}
+	
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/topnav.css') }}" />
+    <link rel="stylesheet" type="text/css" media="only screen and (max-device-width: 800px)" href="{{ url_for('static', filename='stylesheets/topnav_portable.css') }}" />
+
+{% endmacro %}
+
+
+{% macro topnav() %}
+
+<div id="topNav" class="dark boxshadow">
+	<a href="/"><img id="navItemLogo" class="left" src="{{ url_for('static', filename='icons/icon.png') }}"></a>
+	<img id="toggle-menu" class="right pointer button" src="{{ url_for('static', filename='icons/menu.png') }}" onclick="toggle_menu();">
+	<a href="/settings"><img class="right pointer button" src="{{ url_for('static', filename='icons/settings.png') }}"></a>
+	<img class="right pointer button" onclick="display_modal();" src="{{ url_for('static', filename='icons/plus.png') }}">
+	<input id="search" class="right" type="text" placeholder="Search" onkeypress="return search_enter_key(event);"><div id="search_results" class="boxshadow"></div>
+	<a href="/tvshows" class="navItemBox yellow" id="navItemBox_tvshow">
+		<div class="navItemText pointer">TV Shows</div>
+	</a>
+	<a href="/movies"  class="navItemBox green" id="navItemBox_movie">
+		<div class="navItemText pointer">Movies</div>
+	</a>
+	<a href="/pictures"  class="navItemBox orange" id="navItemBox_picture">
+		<div class="navItemText pointer">Pictures</div>
+	</a>
+	<div class="clearfix"></div>
+</div>
+
+
+{% endmacro %}

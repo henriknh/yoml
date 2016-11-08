@@ -1,0 +1,162 @@
+{% extends "index.html" %}
+{%- from 'static/util/topnav.html' import head, topnav with context %}
+{%- from 'static/util/search.html' import search with context %}
+{%- from 'static/util/variables.html' import list_empty %}
+
+{% block title %}TV Show{% endblock %}
+{% block head %}
+{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/tvshow.css') }}" />
+	<link rel="stylesheet" media="only screen and (max-device-width: 800px)" href="{{ url_for('static', filename='stylesheets/tvshow_portable.css') }}" />
+	<script type="text/javascript" src="{{ url_for('static', filename='js/tvshow.js') }}"></script>
+	{{ head() }}
+{% endblock %}
+
+
+{% block body %}
+	{{ topnav() }}
+	<!--{{ search() }}-->
+{% endblock %}
+
+
+{% block content %}
+
+{% if tvshow|length == 0 %}
+<div id="empty">
+	<div id="phrase">{{ list_empty|random() }}</div>
+	<div id="add_new">Try to add new media in Settings</div>
+</div>
+
+{% else %}
+
+
+
+<script>
+var rating = {{ tvshow['Rating'] }} / 10 * 90;
+
+
+{% for cfg in config %}
+    {% if cfg['config'] == 'display_fanart' and cfg['value'] == '1' %}
+        setBackground("/static/banners/{{ tvshow['fanart'] }}");
+    {% endif %}
+{% endfor %}
+</script>
+
+<div class="tvshow">
+	<div class="info">
+
+		<div class="header textshadow left">{{ tvshow['SeriesName'] }}</div>
+		<div class="firstaired textshadow right">{{ tvshow['FirstAired'].split('-')[0] }}</div>
+		<div class="clearfix"></div>
+
+		<img class="poster loading left" src="/static/banners/{{ tvshow['poster'] }}">
+
+		<div class="runtime textshadow">{{ tvshow['Runtime'] }} min</div>
+		<div class="genre textshadow">{{ tvshow['Genre'][1:-1]|replace('|', ', ') }}</div>
+		<div class="rating right">
+			<div class="" style="max-width: {{ tvshow['Rating']|int / 10 * 90 }}px; overflow:hidden;">
+				<img src="/static/icons/rating.png" style="width: 90px;">
+			</div>
+			<img class="rating-background" src="/static/icons/rating.png">
+		</div>
+
+		<div class="overview">{{ tvshow['Overview'] }}</div>
+		<div id="actors" class="actors">{{ tvshow['Actors'][1:-1]|replace('|', ', ') }}</div>
+	</div>
+
+	
+
+	<div id="media_options">
+		<!--<img class="option" src="/static/icons/download.png">-->
+		<img class="option right" src="/static/icons/trash.png"  onclick="remove_media()">
+		{% if tvshow['watched'] %}
+			<img class="option right" src="/static/icons/unwatched.png" onclick="toggle_media_watched(this)">
+		{% else %}
+			<img class="option right" src="/static/icons/watched.png" onclick="toggle_media_watched(this)">
+		{% endif %}
+		<img class="option right" src="/static/icons/refresh.png" onclick="refresh_media()">
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="clearfix">
+
+	<div class="seasons">
+
+		{% set lastSeasonNumber = -123 %}
+
+		{% for episode in episodes %}
+
+			{% if episode['SeasonNumber'] != lastSeasonNumber %}
+				<div class="clearfix"></div>
+
+				<div class="season_header">Season {{ episode['SeasonNumber'] }}</div>
+			{% endif %}
+
+			{% set lastSeasonNumber = episode['SeasonNumber'] %}
+
+
+				{% if servertime < episode['FirstAired']|datetime %}
+					
+					<div class="episode left">
+						<div class="episode_thumbnail coming">
+							{{ episode['FirstAired'] }}
+						</div>
+
+						{% for c in config %}
+							{% if c['config'] == 'display_media_title' and c['value'] == '1' %}			
+								<!--<div class="text series_name left">{{ episode['EpisodeName'] }}</div>-->
+								<div class="text series_number right">S{{ '%02d' % episode['SeasonNumber']|int }}E{{ '%02d' % episode['EpisodeNumber']|int }}</div>
+							{% endif %}
+						{% endfor %}
+
+					</div>
+
+				{% else %}
+
+					<a href="/tvshows/{{ tvshow['tvshow_id'] }}/{{ episode['episode_id'] }}" class="episode pointer left">
+						<div class="episode_thumbnail"
+						{% if episode['path'] == '' %}
+							style="background-color: black;"
+						{% endif %}
+						>
+							<img class="episode_thumbnail_img loading" src="/static/banners/{{ episode['filename'] }}"
+							{% if episode['path'] == '' %}
+								style="opacity: 0.2" onmouseover="this.style.opacity='0.1';" onmouseout="this.style.opacity='0.2';"
+							{% endif %}
+							>
+
+							<div class="episode_status">
+								{% if episode['progress'] == 0 and episode['watched'] == 0 %}
+								<div class="unwatched"></div>
+								{% endif %}
+								{% if episode['path'] == '' %}
+									<div class="undownloaded"></div>
+								{% endif %}
+
+								{% if episode['downloading'] != 0 %}
+									<div class="downloading"></div>
+								{% endif %}
+							</div>
+							
+							<div class="progress left" style="width: {{ episode['progress'] }}%;"></div>
+						</div>
+
+						{% for c in config %}
+							{% if c['config'] == 'display_media_title' and c['value'] == '1' %}			
+								<div class="text series_name left">{{ episode['EpisodeName'] }}</div>
+								<div class="text series_number right">S{{ '%02d' % episode['SeasonNumber']|int }}E{{ '%02d' % episode['EpisodeNumber']|int }}</div>
+							{% endif %}
+						{% endfor %}
+						
+					</a>
+				{% endif %}
+
+		{% endfor %}
+
+	</div>
+
+</div>
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,99 @@
+.backgroundimg {}
+.dim {}
+.info {
+	margin-top: 0;
+	padding: 0; 
+}
+.info .data {}
+.info .poster {
+	left: initial;
+	top: initial;
+	position: initial;
+	width: 30%;
+	max-width: 100px;
+	height: auto;
+}
+.info .header {
+	margin: 20px 0px 0px 20px;
+	line-height: initial;
+}
+.info .runtime {
+	margin-left: 120px;
+}
+.info .firstaired {
+	margin: 20px 20px 0px 0px;
+}
+.info .genre {
+	margin-left: 120px;
+	margin-right: 10px;
+}
+.info .rating {
+	float: initial;
+	margin-left: 120px;
+	margin-top: 18px;
+	width: initial;
+}
+.info .rating .rating-background {}
+.info .overview {
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.info .actors {
+	margin-left: 10px;
+}
+.info #bottomMenu {}
+
+
+
+
+
+.seasons {}
+.season_header {
+	margin-bottom: 15px;
+	margin-left: 5%;
+	padding-left: 0;
+}
+
+.episode {
+	width: 50%;
+	margin: 0;
+}
+.episode .episode_thumbnail {
+	width: 80%;
+	height: auto;
+	margin-left: 10%;
+	margin-right: 10%;
+	float: left;
+}
+
+.episode .episode_thumbnail img {
+	width: 100%;
+	height: auto;
+}
+
+.episode .episode_thumbnail img:hover {}
+.episode .episode_thumbnail img:active {}
+.episode .coming {}
+.episode .episode_status {}
+.episode .episode_status .unwatched, .episode .episode_status .undownloaded, .episode .episode_status .downloading {}
+.episode .episode_status .unwatched {}
+.episode .episode_status .undownloaded {}
+.episode .episode_status .downloading {}
+.episode .not_watched123 {}
+
+.episode .progress {}
+
+.episode .text {}
+
+.episode .series_name {
+	margin-left: 10%;
+	width: 80%;
+}
+
+.episode .series_number {
+	float: left;
+	text-align: left;
+	margin-left: 10%;
+	width: 80%;
+	margin-bottom: 30px;
+}

@@ -1,0 +1,140 @@
+body, #content  {
+    overflow-y: hidden;
+}
+#content {
+    min-height: 100%;
+    height: 100%;
+    padding-top: 0px;
+}
+#footer {
+    display: none;
+}
+#videocontainer {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+video {
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background-color: black;
+}
+#content {
+    width: 100%;
+    height: 100%;
+    background-color: initial;
+}
+
+#bottomBar , #topBar {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+#bottomBar .button:hover, #topBar .button:hover, #playPauseMiddle .button:hover {
+    opacity: 0.8;
+}
+#bottomBar .button:active, #topBar .button:active, #playPauseMiddle .button:active {
+    opacity: 0.5;
+}
+
+#topBar {
+    top: 0px;
+}
+#title {
+    height: 80px;
+    line-height: 80px;
+    color: #F7FFF7;
+    font-weight: bold;
+    font-size: 36px;
+    float: left;
+    margin-left: 20px;
+}
+#playPauseMiddle {
+    position: absolute;
+    width: 115px;
+    height: 115px;
+    left: 50%;
+    top: 50%;
+    background-color: rgba(0,0,0,0.7);
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+}
+#playPauseMiddle img {
+    width: 100px;
+    height: 100px;
+}
+#bottomBar {
+    bottom: 0px;
+}
+
+#bottomBar .item {
+    margin: 10px;
+    height: 50px;
+    float: left;
+    background: none; 
+}
+
+#bottomBar .button {
+    width: 50px;
+}
+
+#bottomBar #volume {
+    width: 150px;
+}
+
+#bottomBar #currentTime, #bottomBar #totalTime {
+    width: 70px;
+    height: 50px;
+    display: inline;
+    color: #F7FFF7;
+    line-height: 50px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+#bottomBar input[type=range]{
+    -webkit-appearance: none;
+}
+
+#bottomBar input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+#bottomBar input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    margin-top: -6px;
+    border: 1px rgba(0,0,0,0.7) solid; 
+    background: rgb(255, 255, 255);
+}
+
+#bottomBar input[type=range]::-webkit-slider-thumb:hover {
+    background: rgb(200, 200, 200);
+}
+#bottomBar input[type=range]::-webkit-slider-thumb:active {
+    background: rgb(150, 150, 150);
+}
+
+#bottomBar input[type=range]:focus {
+    outline: none;
+}
+
+#bottomBar input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+
+
+
+#topBar #chromecast {
+    width: 65.33px;
+}
