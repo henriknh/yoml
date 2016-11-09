@@ -44,8 +44,10 @@ database = Database(dataDir)
 config = Config(database)
 
 # Subtitle
-#subtitle = Subtitle('username', 'password')
-subtitle = None
+subtitleUsername = 'ziggestark'
+subtitlepassword = 'swormaster1'
+subtitle = Subtitle(subtitleUsername, subtitlepassword)
+#subtitle = None
 
 # FFMPEG
 ffmpeg = ffmpeg(config, subtitle)

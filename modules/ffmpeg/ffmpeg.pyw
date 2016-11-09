@@ -29,7 +29,7 @@ class ffmpeg():
 		output = str(uuid.uuid4())
 
 		# Download subtitle
-		if self.config.get_config_by_config('display_subtitle')['value'] == '1' and this.subtitle != None:
+		if self.config.get_config_by_config('display_subtitle')['value'] == '1' and self.subtitle != None:
 			subtitle_language = [x.strip() for x in self.config.get_config_by_config('display_subtitle_language')['value'].split(',')]
 			self.subtitle.handle_sub(input, output, subtitle_language, -1*int(time))
 
