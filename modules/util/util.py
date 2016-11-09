@@ -1,5 +1,5 @@
-from PIL import Image
 from packages.resizeimage.resizeimage import *
+import packages.PIL
 import urllib, urllib2
 import os
 import logging
