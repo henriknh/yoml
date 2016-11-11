@@ -47,11 +47,9 @@ config = Config(database)
 subtitleUsername = 'ziggestark'
 subtitlepassword = 'swormaster1'
 subtitle = Subtitle(subtitleUsername, subtitlepassword)
-#subtitle = None
 
 # FFMPEG
 ffmpeg = ffmpeg(config, subtitle)
-ffmpeg.clean_ffmpeg()
 
 # Torrent
 torrent = Torrent(database)

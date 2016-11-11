@@ -24,6 +24,8 @@ class ffmpeg():
 
 		logging.info("FFMPEG started")
 
+		self.clean_ffmpeg()
+
 	def run_ffmpeg(self, input, time=0):
 
 		output = str(uuid.uuid4())

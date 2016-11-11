@@ -4,7 +4,7 @@ import math
 import sys
 from functools import wraps
 
-from PIL import Image
+from packages.PIL import Image
 from .imageexceptions import ImageSizeError
 
 
