@@ -1,5 +1,5 @@
 from packages.resizeimage.resizeimage import *
-import packages.PIL
+from PIL import Image
 import urllib, urllib2
 import os
 import logging
@@ -11,60 +11,48 @@ extensions_music = ['mp3']
 
 def download_episodes_image(source, destination, episode_path):
 
-	if os.path.isfile(destination) and os.stat(destination).st_size != 0:
-		return
-
 	directory_exists(os.path.dirname(destination))
 
-	if source != '':
-		rs = download(source, destination)	
+	if (not os.path.isfile(destination) or os.stat(destination).st_size == 0) and source != '':
+		rs = download(source, destination)
+		if rs == False and episode_path != '':
+			logging.info("Create episode thumbnail from file (util, download_episodes_image)")
+		elif rs == False and episode_path == '':
+			return False
 	
-	if episode_path != '' and rs == False:
-		print 'Create episode thumb from file'
-
-		rs = False
-
-
-	if rs == True:
-		with open(destination, 'r+b') as f:
-			with Image.open(f) as image:
-				cover = resize_thumbnail(image, [277, 156])
-				cover.save("{0}{2}.{1}".format(*destination.rsplit('.', 1) + ['-thumb']), image.format)
+	make_thumbnail(destination)
 
 	return True
 
-
-
 def download_fanart_image(source, destination):
-
-	if os.path.isfile(destination) and os.stat(destination).st_size != 0:
-		return
 
 	directory_exists(os.path.dirname(destination))
 
-	if source != '':
+	if (not os.path.isfile(destination) or os.stat(destination).st_size == 0) and source != '':
 		rs = download(source, destination)
-		return rs
-	return False
+		if rs == False:
+			return False
 
+	return True
 
 def download_posters_image(source, destination):
 
-	if os.path.isfile(destination) and os.stat(destination).st_size != 0:
-		return
-	
 	directory_exists(os.path.dirname(destination))
 
-	if source != '':
+	if (not os.path.isfile(destination) or os.stat(destination).st_size == 0) and source != '':
 		rs = download(source, destination)
-		if rs == True:	
-			with open(destination, 'r+b') as f:
-				with Image.open(f) as image:
-					cover = resize_thumbnail(image, [197, 290])
-					cover.save("{0}{2}.{1}".format(*destination.rsplit('.', 1) + ['-thumb']), image.format)
+		if rs == False:
+			return False
+	
+	make_thumbnail(destination)
 
-		return rs
-	return False
+	return True
+
+def make_thumbnail(source):
+	with open(source, 'r+b') as f:
+		with Image.open(f) as image:
+			cover = resize_thumbnail(image, [197, 290])
+			cover.save("{0}{2}.{1}".format(*source.rsplit('.', 1) + ['-thumb']), image.format)
 
 def directory_exists(directory):
 	if not os.path.exists(directory):
